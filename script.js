@@ -231,8 +231,54 @@ $(".far.fa-clock").on("click", function () {
 // Alarm Out
 function AlarmOut() {
   $("body").addClass("BgAnimation");
+  playTimerAlertSound();
   resetTimer();
   StopChecker = 1;
 }
+//------------------------------------------------------------
+var audio; // Declare the audio variable
+
+// Function to play the audio
+function playTimerAlertSound() {
+  if (!audio || audio.paused) {
+    audio = new Audio("alert_sound.wav"); // Replace with the path to your sound file
+
+    // Restart audio playback when it ends
+    audio.addEventListener(
+      "ended",
+      function () {
+        this.currentTime = 0;
+        this.play();
+      },
+      false
+    );
+
+    // Play the sound
+    audio.play();
+  }
+}
+
+// Function to stop the audio
+function stopTimerAlertSound() {
+  if (audio) {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+}
+
+// Function to check for the "BgAnimation" class and play/stop the audio
+function checkBgAnimation() {
+  var bodyElement = document.body;
+
+  // Check if the "BgAnimation" class is present
+  if (bodyElement.classList.contains("BgAnimation")) {
+    playTimerAlertSound();
+  } else {
+    stopTimerAlertSound();
+  }
+}
+
+// Run the check periodically (adjust the interval based on your needs)
+setInterval(checkBgAnimation, 1000);
 
 update_time();
