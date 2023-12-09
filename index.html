@@ -16,6 +16,21 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
+    <div id="blurScreen" class="blur-screen"></div>
+
+    <!-- Warning GIF for portrait mode -->
+    <div
+      id="portraitWarning"
+      class="warning-container"
+      style="background-color: black"
+    >
+      <img src="warning.gif" alt="Portrait Warning" />
+      <p class="warning_message">
+        Please rotate your device to landscape mode/ or resize your window for
+        the best experience.
+      </p>
+    </div>
+
     <div class="container">
       <div class="ClockHolder">
         <div class="WeekDays">
@@ -125,6 +140,69 @@
         </div>
       </div>
     </div>
+
+    <script>
+      window.addEventListener("orientationchange", function () {
+        var blurScreen = document.getElementById("blurScreen");
+        var warningContainer = document.getElementById("portraitWarning");
+
+        if (window.orientation === 0) {
+          // Portrait mode
+          // Show blur screen and warning container
+          blurScreen.style.display = "none";
+          warningContainer.style.display = "flex";
+
+          // Add fading animation
+          setTimeout(function () {
+            blurScreen.style.opacity = "0";
+            warningContainer.style.opacity = "1"; // Set opacity to 1 for warning
+          }, 0);
+
+          // Hide blur screen after the animation ends
+          setTimeout(function () {
+            blurScreen.style.display = "none";
+            blurScreen.style.opacity = "1"; // Reset opacity for future use
+          }, 500); // Adjust the duration as needed (500 milliseconds in this example)
+        } else {
+          // Hide blur screen and warning container for landscape mode
+          blurScreen.style.display = "none";
+          warningContainer.style.display = "none";
+        }
+      });
+      function handleScreenSize() {
+        var blurScreen = document.getElementById("blurScreen");
+        var warningContainer = document.getElementById("portraitWarning");
+
+        if (window.innerWidth <= 768) {
+          // Adjust the threshold as needed
+          // Show blur screen and warning container
+          blurScreen.style.display = "block";
+          warningContainer.style.display = "flex";
+
+          // Add fading animation
+          setTimeout(function () {
+            blurScreen.style.opacity = "0";
+            warningContainer.style.opacity = "1"; // Set opacity to 1 for warning
+          }, 0);
+
+          // Hide blur screen after the animation ends
+          setTimeout(function () {
+            blurScreen.style.display = "none";
+            blurScreen.style.opacity = "1"; // Reset opacity for future use
+          }, 500); // Adjust the duration as needed (500 milliseconds in this example)
+        } else {
+          // Hide blur screen and warning container for larger screens
+          blurScreen.style.display = "none";
+          warningContainer.style.display = "none";
+        }
+      }
+
+      // Initial check on page load
+      window.addEventListener("load", handleScreenSize);
+
+      // Check on window resize
+      window.addEventListener("resize", handleScreenSize);
+    </script>
 
     <script src="script.js"></script>
   </body>
