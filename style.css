@@ -60,15 +60,15 @@ body{
     transform: translate(-50%,-50%);
     display: flex;
     justify-content: center;
+    height:48%;
 }
 
 .ClockHolder{
-    width: 500px;
-    background-color: #1b252a;
+    width: 818px;
     padding: 30px 50px;
-    border-radius: 15px;
-    border: 3px solid #0277BD;
-    position: relative;
+    font-size: x-large;
+    font-family: cursive;
+    font-weight: 800;
 }
 
 .ClockHolder::after{
