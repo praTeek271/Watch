@@ -1,4 +1,4 @@
-# Watch
+# watch
 This Repo consists of the following files :
 - .git
 - alert_sound.wav
@@ -21,4 +21,4 @@ This Repo consists of the following files :
 <br>
 
 
-- uses selenium
+- welcome to this repo
